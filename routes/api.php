@@ -1,0 +1,19 @@
+<?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+
+Route::prefix('books')->group(function(){
+    Route::get('/', [BookController::class, 'getAll'])->name('books.all');
+    Route::get('/{id}', [BookController::class, 'getOne']);
+    Route::post('/', [BookController::class, 'create']);
+    Route::put('/{id}', [BookController::class, 'update']);
+    Route::delete('/{id}', [BookController::class, 'delete']);
+});
+
+Route::get('/filterByParam/{author}/{year}', [BookController::class, 'filterBooksByParam']);
+Route::get('/filterByQuery', [BookController::class, 'filterBooksByQuery']);
+
+Route::get(
+    '/filterByParam/{author}/{year}',
+    [BookController::class, 'filterBooksByParam']
+)->middleware('validate.year');

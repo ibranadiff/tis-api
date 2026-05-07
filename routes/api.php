@@ -17,3 +17,18 @@ Route::get(
     '/filterByParam/{author}/{year}',
     [BookController::class, 'filterBooksByParam']
 )->middleware('validate.year');
+
+Route::prefix('posts')->group(function () {
+    Route::post('/', [PostController::class, 'createPost']);
+    Route::get('/{id}', [PostController::class, 'getPostById']);
+    Route::put('/{id}/tag/{tagid}', [PostController::class, 'addTag']);
+});
+
+Route::prefix('comments')->group(function () {
+    Route::post('/', [CommentController::class, 'createComment']);
+});
+
+
+Route::prefix('tags')->group(function () {
+    Route::post('/', [TagController::class, 'createTag']);
+});

@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\PublicPostController;
+
+
 
 Route::prefix('books')->group(function(){
     Route::get('/', [BookController::class, 'getAll'])->name('books.all');
@@ -32,3 +35,5 @@ Route::prefix('comments')->group(function () {
 Route::prefix('tags')->group(function () {
     Route::post('/', [TagController::class, 'createTag']);
 });
+
+Route::get('/public-posts', [PublicPostController::class, 'getAllPosts']);
